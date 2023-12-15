@@ -1,18 +1,18 @@
 import React from 'react'
 import Navlink from './Navlink'
 import Image from 'next/image'
-import Logo from '@/assets/icons/Logo.svg'
+import Logo from '@/assets/photos/Logo.png'
 const Navbar = () => {
 
 
   return (
-    <div className='h-[6vh] md:h-24 flex flex-row justify-between items-center px-8 sm:px-12 md:px-14 lg:px-20 xl:px-28 text-sm md:text-base'>
-      <div className='flex justify-between items-center cursor-pointer'>
+    <div className='h-[6vh] md:h-24 w-5/6 mx-auto sm:w-full sm:mx-0 flex flex-row justify-between items-center  sm:px-12 md:px-14 lg:px-20 xl:px-28 text-sm md:text-base'>
+      <div className='flex justify-center items-center cursor-pointer gap-2 md:gap-4 xl:gap-6'>
         <div className='relative'>
            <Image
               alt=''
-            src={Logo}
-            className='object-cover w-14 h-14'
+              src={Logo}
+              className='md:object-contain w-6 md:w-8 lg:w-10'
             />
        </div>
         <div className='flex md:text-lg font-semibold'>
