@@ -15,7 +15,7 @@ const WelcomePage = () => {
         <div className='flex flex-col gap-7 h-fit md:h-auto w-full md:w-[320px] lg:w-[420px] xl:p-0 xl:w-[420px]'>
         {/* <div className='flex flex-col gap-7 md:p-8 lg:p-10 xl:p-0 xl:w-[420px]'> */}
           {/* Free */}
-          <div className=' text-base lg:text-lg hidden md:flex flex-row items-center justify-center bg-[#05BE70] rounded-full px-2 opacity-70'>
+          <div className=' text-base lg:text-lg hidden md:flex flex-row items-c enter justify-center bg-[#05BE70] rounded-full px-2 opacity-70'>
             <div className='py-1 px-2 lg:px-4  text-black font-bold bg-white rounded-full'>
               Free
             </div>
