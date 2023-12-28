@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import Link from 'next/link';
 import React, { useRef } from "react";
 import WelcomePage from "@/components/WelcomePage";
 import WhyCarbonPage from "@/components/WhyCarbonPage";

@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Close from "@/assets/icons/Close.svg";
-import Google from "@/assets/icons/Google.svg";
 import { useRouter } from "next/navigation";
 import { login, getCurrentUser } from "@/services/auth.service";
 
@@ -33,12 +32,12 @@ const Login = ({ onClose }: LoginProps) => {
     await login(email, password).then(
       () => {
         // Checking access 0 == admin, 1 == user
-        const response = getCurrentUser()
+        const response = getCurrentUser();
         if(response.access == 0) {
-          router.push("/AdminDashboard");
+          router.push("/Transfer");
         }
         else if(response.access == 1) {
-          router.push("/UserDashboard");
+          router.push("/Transfer");
         }
         else {
           console.log("Cannot check your role!")
