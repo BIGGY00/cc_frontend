@@ -14,7 +14,28 @@ enum UnitType {
 
 const CheckUrCC = () => {
   const [unitType, setUnitType] = useState<UnitType>(UnitType.Acres);
-  const [treeSpace, setTreeSpace] = useState<number>();
+  const [carbonCoin, setCarbonCoin] = useState(0);
+  const [treeSpace, setTreeSpace] = useState("");
+  const [treeSpaceValue, setTreeSpaceValue] = useState(0);
+  const handleCalClicked = () => {
+    let conversionRate = 1;
+
+    if (unitType === UnitType.Hectares) {
+      conversionRate = 2.47105; // 1 acre = 2.47105 hectares
+    } else if (unitType === UnitType.SquareMeters) {
+      conversionRate = 4046.86; // 1 acre = 4046.86 square meters
+    } else if (unitType === UnitType.SquareFeet) {
+      conversionRate = 43560; // 1 acre = 43560 square feet
+    } else if (unitType === UnitType.SquareKilometers) {
+      conversionRate = 0.00404686; // 1 acre = 0.00404686 square kilometers
+    }
+    console.log("unitType", unitType);
+    console.log("conversionRate", conversionRate);
+    let numberOfAcres = 0;
+    if (treeSpace) numberOfAcres = treeSpaceValue / conversionRate;
+    const carbonCreditValue = numberOfAcres * 3;
+    setCarbonCoin(carbonCreditValue);
+  };
   return (
     // <div className="flex flex-col w-full h-[1200px] items-center justify-center">
     <div className="relative flex flex-col w-full h-[1400px] items-center ">
@@ -34,7 +55,10 @@ const CheckUrCC = () => {
             name="treeSpace"
             value={treeSpace}
             placeholder="Enter your tree space"
-            onChange={(e) => setTreeSpace(+e.target.value)}
+            onChange={(e) => {
+              setTreeSpace(e.target.value);
+              setTreeSpaceValue(+e.target.value); 
+            }}
             className="w-1/2 p-2 font-semibold"
           />
           <div className="flex flex-row items-center w-1/2 gap-12">
@@ -55,7 +79,7 @@ const CheckUrCC = () => {
             </select>
             <button
               className="px-6 py-4 rounded-full bg-[#05BE70] text-white font-bold hover:text-[#05BE70] hover:bg-white border hover:border-[#05BE70] hover:underline"
-              onClick={() => {}}
+              onClick={handleCalClicked}
             >
               Calculate
             </button>
@@ -67,10 +91,10 @@ const CheckUrCC = () => {
           </div>
           <div className="flex flex-col gap-2">
             <div className="text-black font-bold text-4xl tracking-wider">
-              <span>0.055</span>
+              <span>{carbonCoin.toFixed(4)}</span>
               <span> Carbon Coins</span>
               <span> {"("}</span>
-              <span>100</span>
+              <span>{(carbonCoin.toFixed(4) as any) * 15}</span>
               <span>USD</span>
               <span>{")"}</span>
             </div>

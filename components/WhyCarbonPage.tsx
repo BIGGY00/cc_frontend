@@ -16,7 +16,7 @@ const WhyCarbonPage = () => {
           innovative system incentivizes eco-friendly practices for a greener,
           more resilient future.
         </p>
-        <p className="font-bold px-6 py-4 text-lg bg-[#05BE70] w-fit rounded-full hover:text-black hover:bg-white">
+        <p className="font-bold px-6 py-4 text-lg bg-[#05BE70] w-fit rounded-full hover:text-black hover:bg-white cursor-pointer">
           Learn More
         </p>
       </div>
