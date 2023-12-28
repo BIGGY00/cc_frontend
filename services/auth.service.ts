@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5005/api/v1/";
+const API_URL = "https://cc-backend-fma6.onrender.com/api/v1/";
 
 export const register = (name: string, email: string, password: string, status: number, access: number) => {
   return axios.post(API_URL + "register", {
