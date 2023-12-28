@@ -2,6 +2,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Close from "@/assets/icons/Close.svg";
 import { useRouter } from "next/navigation";
+import { register, } from "@/services/auth.service";import { access } from "fs";
+;
 interface SignupProps {
   onClose: () => void;
 }
@@ -9,7 +11,15 @@ interface SignupProps {
 const Signup = ({ onClose }: SignupProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const router = useRouter();
+
+  const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -20,8 +30,17 @@ const Signup = ({ onClose }: SignupProps) => {
   };
 
   const handleSignup = async () => {
-    router.push("/");
-    onClose();
+    setMessage("");
+    setLoading(true);
+
+    const status = 1;
+    const access = 1;
+
+    await register(name, email, password, status, access).then(
+      () => {
+        router.push("/");
+      }
+    )
   };
 
   return (
@@ -43,6 +62,15 @@ const Signup = ({ onClose }: SignupProps) => {
         >
           Sign Up Now !!!
         </p>
+        <div className="flex flex-col items-start justify-start gap-3">
+          <p className="text-lg md:text-xl xl:text-2xl">Name</p>
+          <input
+            type="text"
+            className="w-full  p-1 md:p-2 xl:p-3 border border-black rounded-lg"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </div>
         <div className="flex flex-col items-start justify-start gap-3">
           <p className="text-lg md:text-xl xl:text-2xl">Email</p>
           <input
