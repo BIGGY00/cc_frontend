@@ -9,7 +9,8 @@ import { BsInfoCircle } from "react-icons/bs";
 import { getCurrentUser, logout } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { Signer } from "ethers";
-
+import Logo from "@/assets/photos/Logo.png";
+import Image from "next/image";
 function Transfer() {
   const [userRole, setUserRole] = useState("");
   const [address, setaddress] = useState("");
@@ -139,30 +140,42 @@ function Transfer() {
   };
 
   return (
-    <div className="flex flex-col items-right justify-start w-full">
-      <div className="flex justify-end items-start p-5">
+    <div className="flex flex-col items-center justify-start w-full">
+      {/* Navbar */}
+      <div className="flex justify-between items-center py-5 px-6 md:px-12 lg:px-16 w-full">
+        <div className="flex justify-center items-center cursor-pointer gap-2 md:gap-4 xl:gap-6">
+          <div className="relative">
+            <Image
+              alt=""
+              src={Logo}
+              className="md:object-contain w-6 md:w-8 lg:w-10"
+            />
+          </div>
+          <div className="flex md:text-lg font-semibold">CARBON COIN</div>
+        </div>
         <button
           type="button"
           onClick={handleLogout}
-          className="text-white font-semibold cursor-pointer"
+          className="text-white font-semibold"
         >
           Logout
         </button>
       </div>
+
       <div className="flex w-full justify-center items-center">
         <div className="flex mf:flex-row flex-col items-start justify-between md:p-10 py-6 px-4">
-          <div className="flex flex-1 justify-start items-start flex-col mf:mr-10">
-            <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
-              Send CarbonCoin <br /> To others
+          <div className="flex flex-1 w-full justify-center items-center flex-col md:mr-10 ">
+            <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1 text-center font-bold">
+              Send Carbon Coin <br /> To others
             </h1>
-            <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
+            <p className="mt-5 text-white font-light md:w-full text-base text-center  ">
               Explore the carboncoin. Transfer to others easily.
             </p>
             {wallet && wallet.length > 0 ? null : (
               <button
                 type="button"
                 onClick={connectWallet}
-                className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
+                className="flex flex-row justify-center items-center my-5 bg-[#05BE70] rounded-full hover:text-black font-bold hover:bg-white cursor-pointer p-3"
               >
                 <AiFillPlayCircle className="text-white mr-2" />
                 <p className="text-white text-base font-semibold">
@@ -170,7 +183,8 @@ function Transfer() {
                 </p>
               </button>
             )}
-            {/* <button
+          </div>
+          {/* <button
             type="button"
             onClick={connectWallet}
             className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
@@ -178,7 +192,7 @@ function Transfer() {
             <AiFillPlayCircle className="text-white mr-2" />
             <p className="text-white text-base font-semibold">Connect Wallet</p>
           </button> */}
-            {/* {!getCurrentWalletConnected && (
+          {/* {!getCurrentWalletConnected && (
             <button
               type="button"
               onClick={connectWallet}
@@ -191,7 +205,7 @@ function Transfer() {
             </button>
           )} */}
 
-            {/* <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
+          {/* <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
             <div className={`rounded-tl-2xl ${companyCommonStyles}`}>
               Reliability
             </div>
@@ -207,7 +221,6 @@ function Transfer() {
               Blockchain
             </div>
           </div> */}
-          </div>
 
           <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
             <div className="p-3 flex justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 eth-card .white-glassmorphism bg-[#05BE70]">
@@ -219,7 +232,7 @@ function Transfer() {
                   <BsInfoCircle fontSize={17} color="#fff" />
                 </div>
                 <div>
-                  <p className="underline font-semibold text-sm text-[#000] text-lg">
+                  <p className="underline font-semibold text-[#000] text-lg">
                     {wallet && wallet.length > 0
                       ? `Connected: ${wallet.substring(
                           0,
@@ -248,29 +261,35 @@ function Transfer() {
                 onChange={(e: any) => setamount(e.target.value)}
                 className="my-2 w-full rounded-md p-2 outline-none  text-black border border-white text-md white-glassmorphism"
               />
+              {/* <div className="h-[1px] w-full bg-gray-400 my-2" /> */}
+              <div className="py-2 w-full items-center justify-center">
+                {isLoading ? (
+                  <Loader />
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    className="text-white w-full mt-2 p-2 bg-[#05BE70] rounded-full hover:text-black font-bold hover:bg-white cursor-pointer"
+                  >
+                    Send now
+                  </button>
+                )}
 
-              <div className="h-[1px] w-full bg-gray-400 my-2" />
-
-              {isLoading ? (
-                <Loader />
-              ) : (
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
-                >
-                  Send now
-                </button>
-              )}
-              {userRole === "admin" && (
-                <button
-                  type="button"
-                  onClick={mintfs}
-                  className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
-                >
-                  Mint
-                </button>
-              )}
+                {userRole === "admin" && (
+                  <div>
+                    <div className="flex py-2 text-center items-center justify-center">
+                      or
+                    </div>
+                    <button
+                      type="button"
+                      onClick={mintfs}
+                      className="text-white w-full mt-2 p-2 bg-[#05BE70] rounded-full hover:text-black font-bold hover:bg-white cursor-pointer"
+                    >
+                      Mint
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
