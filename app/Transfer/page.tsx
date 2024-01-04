@@ -81,7 +81,7 @@ function Transfer() {
           console.log("Connect to MetaMask using the Connect button");
           return false; // Wallet is not connected
         }
-      } catch (err:any) {
+      } catch (err: any) {
         console.error(err.message);
         return false; // Wallet is not connected (error case)
       }
@@ -94,7 +94,7 @@ function Transfer() {
 
   const addWalletListener = async () => {
     if (typeof window != "undefined" && typeof window.ethereum != "undefined") {
-      window.ethereum.on("accountsChanged", (accounts:any) => {
+      window.ethereum.on("accountsChanged", (accounts: any) => {
         setWallet(accounts[0]);
         console.log(accounts[0]);
       });
@@ -114,7 +114,7 @@ function Transfer() {
         });
         setWallet(accounts[0]);
         console.log(accounts[0]);
-      } catch (err:any) {
+      } catch (err: any) {
         console.error(err.message);
       }
     } else {
@@ -245,7 +245,7 @@ function Transfer() {
                 placeholder="Amount (ETH)"
                 name="amount"
                 type="number"
-                onChange={(e:any) => setamount(e.target.value)}
+                onChange={(e: any) => setamount(e.target.value)}
                 className="my-2 w-full rounded-md p-2 outline-none  text-black border border-white text-md white-glassmorphism"
               />
 

@@ -31,7 +31,9 @@ const page = () => {
   ];
   return (
     <div>
-      <Navbar navProps={navProps} />
+      <div className="sticky z-50">
+        <Navbar navProps={navProps} />
+      </div>
       <div ref={productRef}>
         <WelcomePage />
       </div>
