@@ -175,10 +175,10 @@ function Transfer() {
               <button
                 type="button"
                 onClick={connectWallet}
-                className="flex flex-row justify-center items-center my-5 bg-[#05BE70] rounded-full hover:text-black font-bold hover:bg-white cursor-pointer p-3"
+                className="flex flex-row justify-center items-center my-5 bg-[#05BE70] rounded-full font-bold hover:bg-white cursor-pointer p-3 group"
               >
-                <AiFillPlayCircle className="text-white mr-2" />
-                <p className="text-white text-base font-semibold">
+                <AiFillPlayCircle className="text-white mr-2 group-hover:text-black" />
+                <p className="text-white text-base font-semibold group-hover:text-black">
                   Connect Wallet
                 </p>
               </button>
