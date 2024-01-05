@@ -255,7 +255,7 @@ function Transfer() {
                 className="my-2 w-full rounded-md p-2 outline-none  text-black border border-white text-md white-glassmorphism"
               />
               <input
-                placeholder="Amount (ETH)"
+                placeholder="Amount (CC)"
                 name="amount"
                 type="number"
                 onChange={(e: any) => setamount(e.target.value)}
