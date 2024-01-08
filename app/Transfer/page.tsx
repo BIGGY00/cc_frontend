@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { Signer } from "ethers";
 import Logo from "@/assets/photos/Logo.png";
 import Image from "next/image";
-function Transfer() {
+const Transfer = () => {
   const [userRole, setUserRole] = useState("");
   const [address, setaddress] = useState("");
   const [amount, setamount] = useState(0);

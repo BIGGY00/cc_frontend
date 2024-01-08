@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 export interface StateType {
   openSignup: boolean;
-  setOpenSignup: (arg0: boolean) => void;
+  setOpenSignup: (value: boolean) => void;
 }
 
 const useOpenSignup = create<StateType>((set) => ({
