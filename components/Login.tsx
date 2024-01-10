@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -7,15 +8,15 @@ import { login, getCurrentUser } from "@/services/auth.service";
 
 interface LoginProps {
   onClose: () => void;
+  onLoginSuccess: () => void;
 }
 
-const Login = ({ onClose }: LoginProps) => {
+const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
-
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -28,33 +29,22 @@ const Login = ({ onClose }: LoginProps) => {
   const handleLogin = async () => {
     setMessage("");
     setLoading(true);
-  
-    await login(email, password).then(
-      () => {
-        // Checking access 0 == admin, 1 == user
-        const response = getCurrentUser();
-        if(response.access == 0) {
-          router.push("/Transfer");
-        }
-        else if(response.access == 1) {
-          router.push("/Transfer");
-        }
-        else {
-          console.log("Cannot check your role!")
-        }
-      },
-      (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-  
-        setLoading(false);
-        setMessage(resMessage);
+
+    try {
+      await login(email, password);
+
+      // Checking access 0 == admin, 1 == user
+      const response = getCurrentUser();
+      if (response.access === 0 || response.access === 1) {
+        // Call the onLoginSuccess callback to handle successful login
+        onLoginSuccess();
+      } else {
+        console.log("Cannot check your role!");
       }
-    );
+    } catch (error) {
+      console.error("Login fail")
+      setLoading(false);
+    }
   };
 
   return (
@@ -93,7 +83,7 @@ const Login = ({ onClose }: LoginProps) => {
             onChange={handlePasswordChange}
           />
         </div>
-        <div className="flex flex-row items-center justify-between"></div>
+        {/* Login button */}
         <div
           className="w-full flex items-center justify-center py-2 md:py-3 xl:py-5 text-lg md:text-xl xl:text-2xl text-white bg-[#05BE70] rounded-2xl cursor-pointer"
           onClick={handleLogin}
