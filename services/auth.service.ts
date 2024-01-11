@@ -9,6 +9,11 @@ export const register = (name: string, email: string, password: string, status: 
     password,
     status,
     access,
+  }).then((response) => {
+    if (response.data.message) {
+      console.log(response.data.message);
+    }
+    return response.data; // Returning the entire response for further use if needed
   });
 };
 
@@ -22,6 +27,11 @@ export const login = (email: string, password: string) => {
       if (response.data.data[0].token) {
         localStorage.setItem("user", JSON.stringify(response.data.data[0]));
       }
+      return response.data; // Returning the entire response for further use if needed
+    })
+    .catch((error) => {
+      console.error("Login failed:", error.message);
+      throw error; // Rethrow the error to handle it at the calling point
     });
 };
 

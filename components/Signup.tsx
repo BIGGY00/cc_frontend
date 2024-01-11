@@ -36,11 +36,15 @@ const Signup = ({ onClose }: SignupProps) => {
     const status = 1;
     const access = 1;
 
-    await register(name, email, password, status, access).then(
-      () => {
-        router.push("/");
-      }
-    )
+    try {
+      await register(name, email, password, status, access);
+      router.push("/"); // Redirect on successful signup
+    } catch (error:any) {
+      console.error("Signup failed:", error.message);
+      setMessage("Signup failed. Please try again."); // Set a message for signup failure
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -95,6 +99,10 @@ const Signup = ({ onClose }: SignupProps) => {
         >
           Sign Up
         </div>
+        {/* ... (previous JSX) */}
+        {/* Loading indicator and message display */}
+        {loading && <p className="text-center text-sm text-gray-500">Signing up...</p>}
+        {message && <p className="text-center text-red-500">{message}</p>}
       </div>
     </div>
   );

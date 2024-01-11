@@ -38,13 +38,19 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
       if (response.access === 0 || response.access === 1) {
         // Call the onLoginSuccess callback to handle successful login
         onLoginSuccess();
+        onClose();
       } else {
+        setMessage("Cannot check your role!");
         console.log("Cannot check your role!");
       }
-    } catch (error) {
-      console.error("Login fail")
+    } catch (error:any) {
+      console.error("Login failed:", error.message);
+      setMessage("Login failed. Please check your credentials."); // Set a message for login failure
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
+    
   };
 
   return (
@@ -60,6 +66,10 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
             alt="Close"
           />
         </div>
+        {/* ... (previous JSX) */}
+        {/* Loading indicator and message display */}
+        {loading && <p className="text-center text-sm text-gray-500">Logging in...</p>}
+        {message && <p className="text-center text-red-500">{message}</p>}
         <p className="flex items-center justify-center text-2xl md:text-2xl lg:text-5xl font-semibold">
           Log In
         </p>
