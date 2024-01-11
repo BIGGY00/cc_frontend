@@ -66,10 +66,6 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
             alt="Close"
           />
         </div>
-        {/* ... (previous JSX) */}
-        {/* Loading indicator and message display */}
-        {loading && <p className="text-center text-sm text-gray-500">Logging in...</p>}
-        {message && <p className="text-center text-red-500">{message}</p>}
         <p className="flex items-center justify-center text-2xl md:text-2xl lg:text-5xl font-semibold">
           Log In
         </p>
@@ -100,6 +96,10 @@ const Login: React.FC<LoginProps> = ({ onClose, onLoginSuccess }) => {
         >
           Log In
         </div>
+        {/* ... (previous JSX) */}
+        {/* Loading indicator and message display */}
+        {loading && <p className="text-center text-sm text-gray-500">Logging in...</p>}
+        {message && <p className="text-center text-red-500">{message}</p>}
       </div>
     </div>
   );
