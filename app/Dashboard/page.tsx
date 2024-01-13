@@ -7,15 +7,14 @@ import Plus from "@/assets/icons/Plus.svg";
 import ArrowRise from "@/assets/icons/ArrowRise.svg";
 import Image from "next/image";
 import { getCurrentUser, logout } from "@/services/auth.service";
-import ApexCharts from "@/components/ApexChart";
+let ApexCharts: any;
+if (typeof window !== "undefined") {
+  ApexCharts = require("@/components/ApexChart").default;
+}
 
 const Dashboard = () => {
   const router = useRouter();
 
-  let ApexCharts;
-  if (typeof window !== "undefined") {
-    ApexCharts = require("@/components/ApexChart").default;
-  }
 
   const handleLogout = async () => {
     await logout();
