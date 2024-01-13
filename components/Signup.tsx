@@ -6,6 +6,7 @@ import { register, } from "@/services/auth.service";import { access } from "fs";
 ;
 interface SignupProps {
   onClose: () => void;
+  onSignupSuccess: () => void;
 }
 
 const Signup = ({ onClose }: SignupProps) => {
@@ -38,7 +39,7 @@ const Signup = ({ onClose }: SignupProps) => {
 
     try {
       await register(name, email, password, status, access);
-      router.push("/"); // Redirect on successful signup
+      router.push("/Dashboard"); // Redirect on successful signup
     } catch (error:any) {
       console.error("Signup failed:", error.message);
       setMessage("Signup failed. Please try again."); // Set a message for signup failure

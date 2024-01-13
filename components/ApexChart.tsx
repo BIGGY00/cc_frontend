@@ -1,30 +1,41 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import moment from "moment";
+import { ApexOptions } from "apexcharts";
 
-const ApexChart = () => {
+interface DataPoint {
+  x: string;
+  y: number;
+}
+
+interface Series {
+  name: string;
+  data: DataPoint[];
+}
+
+const ApexChart: React.FC = () => {
   // Sample data
-  const dataSet = [
-    ["2024-01-01", 25000000], // January 1, 2024
-    ["2024-01-02", 30000000], // January 2, 2024
-    ["2024-01-03", 18000000], // January 3, 2024
-    ["2024-01-04", 35000000], // January 4, 2024
-    ["2024-01-05", 42000000], // January 5, 2024
-    ["2024-01-06", 28000000], // January 6, 2024
-    ["2024-01-07", 20000000], // January 7, 2024
-    ["2024-01-08", 32000000], // January 8, 2024
-    ["2024-01-09", 27000000], // January 9, 2024
-    ["2024-01-10", 57000000], // January 10, 2024
+  const dataSet: DataPoint[] = [
+    { x: "2024-01-01", y: 25000000 },
+    { x: "2024-01-02", y: 30000000 },
+    { x: "2024-01-03", y: 18000000 },
+    { x: "2024-01-04", y: 35000000 },
+    { x: "2024-01-05", y: 42000000 },
+    { x: "2024-01-06", y: 28000000 },
+    { x: "2024-01-07", y: 20000000 },
+    { x: "2024-01-08", y: 32000000 },
+    { x: "2024-01-09", y: 27000000 },
+    { x: "2024-01-10", y: 57000000 },
   ];
 
-  const [series, setSeries] = useState([
+  const [series, setSeries] = useState<Series[]>([
     {
       name: "Total Coin",
       data: dataSet,
     },
   ]);
 
-  const [options, setOptions] = useState({
+  const [options, setOptions] = useState<ApexOptions>({
     chart: {
       type: "area",
       stacked: false,
@@ -40,24 +51,22 @@ const ApexChart = () => {
       size: 0,
     },
     fill: {
-        type: "gradient",
-        gradient: {
-          shadeIntensity: 1,
-          inverseColors: false,
-          opacityFrom: 0.45,
-          opacityTo: 0.05,
-          stops: [20, 100, 100, 100],
-        },
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        inverseColors: false,
+        opacityFrom: 0.45,
+        opacityTo: 0.05,
+        stops: [20, 100, 100, 100],
       },
+    },
     yaxis: {
       labels: {
         style: {
           colors: "#8e8da4",
         },
         offsetX: 0,
-        formatter: function (val) {
-          return (val / 1000000).toFixed(2);
-        },
+        formatter: (val: number) => (val / 1000000).toFixed(2),
       },
       axisBorder: {
         show: false,
@@ -72,9 +81,7 @@ const ApexChart = () => {
       labels: {
         rotate: -15,
         rotateAlways: true,
-        formatter: function (val) {
-          return moment(val).format("DD MMM YYYY");
-        },
+        formatter: (val: string) => moment(val).format("DD MMM YYYY"),
       },
     },
     title: {
@@ -92,7 +99,9 @@ const ApexChart = () => {
     },
   });
 
-  const [isDataSelectionOpen, setIsDataSelectionOpen] = useState(false);
+  const [isDataSelectionOpen, setIsDataSelectionOpen] = useState<boolean>(
+    false
+  );
 
   const handleDataSelection = () => {
     setIsDataSelectionOpen(true);

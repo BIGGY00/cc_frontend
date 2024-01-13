@@ -29,6 +29,9 @@ const page = () => {
   const handleLoginSuccess = () => {
     router.push("/Dashboard");
   };
+  const handleSignupSuccess = () => {
+    router.push("/Dashboard");
+  };
 
   const productRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -59,7 +62,7 @@ const page = () => {
       <div ref={contactRef}>
         <Footer />
       </div>
-      {openSignup && <Signup onClose={handleOpenSignup} />}
+      {openSignup && <Signup onClose={handleOpenSignup} onSignupSuccess={handleSignupSuccess} />}
       {openLogin && <Login onClose={handleOpenLogin} onLoginSuccess={handleLoginSuccess} />}
     </div>
   );
