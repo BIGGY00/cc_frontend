@@ -12,11 +12,16 @@ import ApexCharts from "@/components/ApexChart";
 const Dashboard = () => {
   const router = useRouter();
 
+  let ApexCharts;
+  if (typeof window !== "undefined") {
+    ApexCharts = require("@/components/ApexChart").default;
+  }
+
   const handleLogout = async () => {
     await logout();
     router.push("/");
   };
-  
+
   const handleTransfer = async () => {
     router.push("/Transfer");
   };
