@@ -55,7 +55,7 @@ const ApexChart = () => {
           colors: "#8e8da4",
         },
         offsetX: 0,
-        formatter: function (val: any) {
+        formatter: function (val) {
           return (val / 1000000).toFixed(2);
         },
       },
@@ -72,7 +72,7 @@ const ApexChart = () => {
       labels: {
         rotate: -15,
         rotateAlways: true,
-        formatter: function (val: any) {
+        formatter: function (val) {
           return moment(val).format("DD MMM YYYY");
         },
       },
