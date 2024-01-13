@@ -27,7 +27,7 @@ const page = () => {
   };
 
   const handleLoginSuccess = () => {
-    router.push("/Transfer");
+    router.push("/Dashboard");
   };
 
   const productRef = useRef<HTMLDivElement>(null);

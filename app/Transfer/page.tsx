@@ -25,8 +25,9 @@ const Transfer = () => {
       const ContractAddress = contractAddress;
       const abi = contractABI;
       const contract = new ethers.Contract(ContractAddress, abi, signer);
+      const use_amount = amount * 1000;
       try {
-        await contract.transfer(address, amount);
+        await contract.transfer(address, use_amount);
       } catch (error) {
         console.log(error);
       }
@@ -139,10 +140,14 @@ const Transfer = () => {
     router.push("/");
   };
 
+  const handleDashboard = async () => {
+    router.push("/Dashboard");
+  };
+
   return (
     <div className="flex flex-col items-center justify-start w-full">
       {/* Navbar */}
-      <div className="flex justify-between items-center py-5 px-6 md:px-12 lg:px-16 w-full">
+      <div className="flex items-center py-5 px-6 md:px-12 lg:px-16 w-full">
         <div className="flex justify-center items-center cursor-pointer gap-2 md:gap-4 xl:gap-6">
           <div className="relative">
             <Image
@@ -153,13 +158,24 @@ const Transfer = () => {
           </div>
           <div className="flex md:text-lg font-semibold">CARBON COIN</div>
         </div>
-        <button
-          type="button"
-          onClick={handleLogout}
-          className="text-white font-semibold"
-        >
-          Logout
-        </button>
+
+        {/* Logout Button */}
+        <div className="ml-auto">
+          <button
+            type="button"
+            onClick={handleDashboard}
+            className="text-white font-semibold mx-5 hover:bg-emerald-400 rounded"
+          >
+            Dashboard
+          </button>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="text-white font-semibold hover:bg-emerald-400 rounded"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       <div className="flex w-full justify-center items-center">
